@@ -4,6 +4,12 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
+// Polyfill for ReadableStream in Node.js 16
+if (typeof globalThis.ReadableStream === 'undefined') {
+  const { ReadableStream } = require('stream/web');
+  globalThis.ReadableStream = ReadableStream;
+}
+
 const path = require('path');
 const _ = require('lodash');
 
