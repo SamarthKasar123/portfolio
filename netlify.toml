@@ -1,0 +1,19 @@
+[build]
+  command = "npm install --legacy-peer-deps && npm run build"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "16.20.2"
+  NPM_FLAGS = "--legacy-peer-deps"
+  YARN_ENABLED = "false"
+  NPM_ENABLED = "true"
+
+# Force npm instead of yarn
+[[plugins]]
+  package = "netlify-plugin-no-more-404"
+
+# Redirect rules for single page application
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
