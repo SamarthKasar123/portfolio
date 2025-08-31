@@ -2,12 +2,12 @@ const config = require('./src/config');
 
 module.exports = {
   siteMetadata: {
-    title: 'Brittany Chiang',
+    title: 'Samarth Kasar',
     description:
-      'Brittany Chiang is a software engineer who specializes in building (and occasionally designing) exceptional digital experiences.',
-    siteUrl: 'https://brittanychiang.com', // No trailing slash allowed!
+      'Samarth Kasar is a full-stack developer specializing in building exceptional digital experiences with modern web technologies.',
+    siteUrl: 'https://samarthkasar.netlify.app', // No trailing slash allowed!
     image: '/og.png', // Path to your image you placed in the 'static' folder
-    twitterUsername: '@bchiang7',
+    twitterUsername: '@samarthkasar',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -16,12 +16,12 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sitemap`,
-    `gatsby-plugin-robots-txt`,
+    // `gatsby-plugin-robots-txt`, // Removed: requires Gatsby v5
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Brittany Chiang',
-        short_name: 'Brittany Chiang',
+        name: 'Samarth Kasar',
+        short_name: 'Samarth Kasar',
         start_url: '/',
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
@@ -29,7 +29,7 @@ module.exports = {
         icon: 'src/images/logo.png',
       },
     },
-    `gatsby-plugin-offline`,
+    // `gatsby-plugin-offline`, // Removed: ReadableStream compatibility issues with Node 16
     {
       resolve: `gatsby-source-filesystem`,
       options: {
