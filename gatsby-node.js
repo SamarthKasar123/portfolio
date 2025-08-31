@@ -4,10 +4,47 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// Polyfill for ReadableStream in Node.js 16
+// Polyfills for Node.js compatibility with modern web APIs
 if (typeof globalThis.ReadableStream === 'undefined') {
-  const { ReadableStream } = require('stream/web');
-  globalThis.ReadableStream = ReadableStream;
+  try {
+    const { ReadableStream } = require('stream/web');
+    globalThis.ReadableStream = ReadableStream;
+  } catch (e) {
+    // Fallback for older Node versions
+    globalThis.ReadableStream = class ReadableStream {};
+  }
+}
+
+if (typeof globalThis.File === 'undefined') {
+  try {
+    const { File } = require('node:buffer');
+    globalThis.File = File;
+  } catch (e) {
+    // Fallback polyfill
+    globalThis.File = class File {
+      constructor(fileBits, fileName, options = {}) {
+        this.name = fileName;
+        this.type = options.type || '';
+        this.size = 0;
+        this.lastModified = Date.now();
+      }
+    };
+  }
+}
+
+if (typeof globalThis.Blob === 'undefined') {
+  try {
+    const { Blob } = require('node:buffer');
+    globalThis.Blob = Blob;
+  } catch (e) {
+    // Fallback polyfill
+    globalThis.Blob = class Blob {
+      constructor(blobParts = [], options = {}) {
+        this.type = options.type || '';
+        this.size = 0;
+      }
+    };
+  }
 }
 
 const path = require('path');
